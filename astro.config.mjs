@@ -4,11 +4,13 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site:"https://github.com/file-name-system/file-name-system.github.io",
+	
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: 'File Name System',
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				github: 'https://github.com/file-name-system/file-name-system.github.io',
 			},
 			sidebar: [
 				{
