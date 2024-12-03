@@ -1,0 +1,14 @@
+
+
+:root {
+    --sl-text-lg: 1.125rem;
+    --sl-text-2xl: 1.35rem;  /* 기존 1.5rem */
+    --sl-text-3xl: 1.53rem;  /* 기존 1.8125rem */
+    --sl-text-4xl: 1.6rem;  /* 기존 2.1875rem */
+    --sl-text-5xl: 1.86rem;  /* 기존 2.625rem */
+    --sl-text-6xl: 3.6rem;   /* 기존 4rem */
+ 
+  }
+
+
+
