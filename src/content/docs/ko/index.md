@@ -1,11 +1,11 @@
 ---
 title: File Name System
-description: System for File and Directory Naming Convention
+description: 파일과 디렉토리 작명규칙을 위한 시스템
 template: splash
-editUrl: true
-
+sidebar:
+  hidden: true
 hero:
-  tagline: System for File and Directory Naming Convention
+  tagline: 파일과 디렉토리 작명규칙을 위한 시스템
   image:
     file: ../../../assets/logo.png
   actions:

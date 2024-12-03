@@ -3,7 +3,6 @@ title: File Name System
 description: System for File and Directory Naming Convention
 template: splash
 editUrl: true
-
 hero:
   tagline: System for File and Directory Naming Convention
   image:

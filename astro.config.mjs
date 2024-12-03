@@ -32,16 +32,7 @@ export default defineConfig({
 			social: {
 				github: 'https://github.com/file-name-system/file-name-system.github.io',
 			},
-			sidebar: [
-				{
-					label: 'Guides',
-				 slug: 'guide'
-				},
-				{
-					label: 'Spec',
-				 slug: 'spec'
-				},
-			],
+			
 		}),
 	],
 });
