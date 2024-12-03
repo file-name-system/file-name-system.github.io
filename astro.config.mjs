@@ -4,7 +4,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-	site:"https://github.com/file-name-system/file-name-system.github.io",
+	site:"https://file-name-system.github.io",
 	trailingSlash:"always",
 
 	integrations: [
