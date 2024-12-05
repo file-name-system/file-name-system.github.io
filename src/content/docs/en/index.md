@@ -1,17 +1,18 @@
 ---
 title: File Name System
-description: System for File and Directory Naming Convention
+description: A system for file and directory naming conventions
 template: splash
-editUrl: true
+sidebar:
+  hidden: true
 hero:
-  tagline: System for File and Directory Naming Convention
+  tagline: A system for file and directory naming conventions
   image:
     file: ../../../assets/logo.png
   actions:
-    - text: Guides
+    - text: Guide
       link: guide/
       icon: right-arrow
-    - text: YAML Spec 
+    - text: YAML Spec
       link: spec/
       icon: document
       variant: minimal

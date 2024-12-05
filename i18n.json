@@ -8,7 +8,7 @@
   },
   "buckets": {
     "markdown": {
-      "include": ["src/content/docs/[locale]/*.md"]
+      "include": ["src/content/docs/[locale]/*.md","src/content/docs/[locale]/*.mdx"]
     }
   }
 }

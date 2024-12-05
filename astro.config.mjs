@@ -15,10 +15,15 @@ export default defineConfig({
 			  ],
 			title: 'File Name System',
 			defaultLocale: 'en', // optional
+			
+			
 			locales: {
+				
+
 				en: {
 					label: 'English',
-				  },
+				
+				},
 				'ko': {
 				  label: '한국어',
 			

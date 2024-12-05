@@ -1,0 +1,87 @@
+---
+title: Guide
+description: Introduction to FNS
+---
+
+import { FileTree } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>This document has been automatically translated. [Request modification](https://github.com/file-name-system/file-name-system.github.io)</Aside>
+
+## What is FNS?
+
+FNS (File Name System) is a *system for file and directory naming conventions*. 
+
+As always, systems are created to eliminate disorder and chaos. The folders we open and close dozens of times every day are not easy to organize. 
+
+The image below is a famous meme that always appears when discussing this topic.
+
+[![Example of folders without a system](../../../assets/images/guide/image.png)](https://xkcd.com/1459)
+
+The main reason folders are disorganized, hard to find, and difficult to utilize is because of poorly structured file names. FNS is a system designed to solve this problem. 
+
+The purpose of this homepage and [community](https://github.com/file-name-system/file-name-system.github.io/discussions) is to create an FNS standard that everyone can use and share, similar to the WWW .
+
+## How does it work?
+
+FNS consists of a file format for storing naming conventions and tools that use them. It's similar to the relationship between HTML and related software (web browsers and web servers).
+
+### 1. FNDL (File Name Description Language)
+
+You can describe file naming rules very easily and simply. 
+For example, let's assume we have files like these: 
+
+<FileTree>
+- Report-revenue-20240103.xls
+- Report-users-20240103.xls
+- Report-traffic-20240105.xls
+- Report-ad-20240106.xls
+- ...
+</FileTree>
+
+The FNDL representing this would be: 
+
+```yaml title="index.yaml"
+- Report-<TITLE>-<YYYYMMDD>.xls
+```
+Repeating patterns are expressed with `<>`. It's not complicated like xml. You can create it right away with just a notepad. 
+
+Now let's express folders.
+
+<FileTree>
+- Reports
+  - Report-revenue-20240103.xls
+  - Report-users-20240103.xls
+  - Report-traffic-20240105.xls
+  - Report-ad-20240106.xls
+  - ...
+</FileTree>
+
+Folders and files like above can be expressed as: 
+
+```yaml title="index.yaml"
+- Reports: 
+  - Report-<TITLE>-<YYYYMMDD>.xls
+```
+
+Use `:` to indicate a folder, and indentation spaces to show items within the folder. 
+
+With just one yaml file like this, you can understand the content and structure of folders and share them with others. 
+For example, it becomes easier to explain work folders to others, hand over tasks, or collaborate. 
+Most importantly, since this file can be precisely interpreted by machines, it enables various applications and extensions. 
+
+The examples used above use simplified yaml to convey core concepts. 
+Please check the [FNDL specification document](../spec/) for the actual specifications.
+
+### 2. End-user software
+
+For FNS to be accepted by general users, user-friendly software is needed in various fields. 
+We will categorize and introduce software and services that use FNDL here.
+
+## FAQ
+
+Q: How is FNS different from existing file naming conventions? 
+> While having similar goals, there are two major differences. First, existing file naming conventions don't have a language (rules) to describe the conventions. They're sometimes stored in Word files, sometimes in Excel files. This makes it difficult to share and process them as data. Second, naming conventions only demand additional work from users without providing any convenience. For these reasons, although everyone understands the necessity, simple naming conventions have been ignored by users. FNS provides both data structure and software together. 
+
+Q: Decades have passed since file systems emerged. Doesn't FNS already exist?
+> Strictly speaking, it does exist. File extensions can be considered the first FNS. In the 1970s, extensions separated by '.' were introduced in CP/M OS, and were later adopted by most environments. Icons are distinguished by extensions, and they determine which program should be used to open files. Many software applications use these extensions to interpret and process files. Extensions can be considered the first successful FNS. However, unfortunately, progress in this field has remained stagnant for over 50 years since then. FNS aims to restart this development.

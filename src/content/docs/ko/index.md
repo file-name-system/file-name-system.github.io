@@ -9,7 +9,7 @@ hero:
   image:
     file: ../../../assets/logo.png
   actions:
-    - text: Guides
+    - text: 안내서
       link: guide/
       icon: right-arrow
     - text: YAML Spec 
