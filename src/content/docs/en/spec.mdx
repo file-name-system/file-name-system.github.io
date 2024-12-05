@@ -3,13 +3,17 @@ title: FNDL yaml Spec
 description: Describes FNS using yaml files.
 ---
 
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>This is an automatically translated document. [Request changes](https://github.com/file-name-system/file-name-system.github.io)</Aside>
+
 # File Name Description Language - ver0.1_draft
 
-## Overview
+## Definition
 
 FNDL defines the naming conventions assigned to folders and files.
 It describes the structure and composition that file and folder names should have.
-This specification is saved in YAML format.
+This specification is stored in YAML format.
 
 ## Detailed specifications
 
@@ -19,25 +23,23 @@ Must include at least 3 parts without omission and in order, using "---".
 
 ---
 
-### part1: Folder tree structure and patterns that names should have
+### part1: Tree structure of folders and patterns that names should have
 
-- foldername: # Ending with ":" indicates it's a folder
-  - subfoldername:   #Tree structure is expressed by leading spaces
+- folder_name: # Ending with ":" indicates it's a folder
+  - subfolder_name:   #Tree structure is expressed by spaces at the front
   - <pattern1>-<color>  #Patterns are expressed using < and >
-
 ---
 
 ### part2: Actual examples that can be used for patterns defined in part1. Not mandatory
 
 color:["black","red","white"]  # Stored as an array
-
 ---
 
 ### part3: Describes patterns defined in part1 that can be expressed as regular expressions
 
 pattern1:'.+'  
 ```
-Custom pattern names must use lowercase. Uppercase patterns may be included in the specification (e.g., YYYY, MM, etc.)
+Custom pattern names must use lowercase. Uppercase patterns may be included in the specification (such as YYYY, MM, etc.)
 
 #### Real examples
 
@@ -80,13 +82,17 @@ EXT: "[a-zA-Z0-9]{1,5}" # File extension pdf xlsx ppt ...
 
 FNDL files are stored in `./.fns/index.yaml` relative to the base folder.
 
-## FNDL validation
+## FNDL validation checks
 
 1. Must follow the [YAML Spec](https://yaml.org/spec/).  
 1. Must contain at least 3 documents.
-1. The top-level item in the first document must be a Block Sequence.   
-1. Block Sequences in the first document can contain either Mappings (representing subfolders) or string Scalars (representing files).
+1. The top-level item of the first document must be a Block Sequence.   
+1. The Block Sequence in the first document can contain Mappings (representing subfolders) or string Scalars (representing files).
 1. Mappings in the first document must have exactly one key, which stores the subfolder name.
-1. The value of Mappings in the first document must be either a Block Sequence (when the subfolder has contents) or empty (for empty folders).
-1. The second document can contain multiple Mappings with key values (pattern names) and values. These values store string Scalar arrays (examples of strings that can match the pattern).
-1. The third document can contain multiple Mappings with key values (pattern names) and values. These values store string Scalars (regular expressions that can recognize the pattern).
+1. The value of a Mapping in the first document must be either a Block Sequence (when the subfolder has contents) or empty (for empty folders).
+1. The second document can contain multiple Mappings, with key values (pattern names) and values. These values store string Scalar arrays (examples of strings that can match the pattern).
+1. The third document can contain multiple Mappings, with key values (pattern names) and values. These values store string Scalars (regular expressions that can recognize the pattern).
+
+## Contributing
+
+If you have any questions or feedback about FNDL, you can participate in the [discussions](https://github.com/file-name-system/file-name-system.github.io/discussions).
