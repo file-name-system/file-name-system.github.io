@@ -1,11 +1,11 @@
 ---
-title: FNDL yaml Spec
+title: FNDL yaml spec
 description: Describes FNS using yaml files.
 ---
 
 import { Aside } from '@astrojs/starlight/components';
 
-<Aside>This is an automatically translated document. [Request changes](https://github.com/file-name-system/file-name-system.github.io)</Aside>
+<Aside>This is an automatically translated document. [Request modifications](https://github.com/file-name-system/file-name-system.github.io)</Aside>
 
 # File Name Description Language - ver0.1_draft
 
@@ -23,27 +23,41 @@ Must include at least 3 parts without omission and in order, using "---".
 
 ---
 
-### part1: Tree structure of folders and patterns that names should have
+### part1: Document description
 
-- folder_name: # Ending with ":" indicates it's a folder
-  - subfolder_name:   #Tree structure is expressed by spaces at the front
-  - <pattern1>-<color>  #Patterns are expressed using < and >
+TITLE: yaml example # Document title. Required field
+VERSION: 1.0 # FNDL version. Required field
+date: 2020-01-01 # The remaining document fields can be freely added to describe this file. Key names must use lowercase.
+
 ---
 
-### part2: Actual examples that can be used for patterns defined in part1. Not mandatory
+### part2: Name and path patterns
 
-color:["black","red","white"]  # Stored as an array
+- folder name: # Ending with ":" indicates it's a folder
+  - subfolder name: # Tree structure is expressed with leading spaces
+  - <pattern1>-<color> # Patterns are expressed using < and >
 ---
 
-### part3: Describes patterns defined in part1 that can be expressed as regular expressions
+### part3: Actual examples that can be used for patterns defined in part1. Not required
 
-pattern1:'.+'  
+color:["black","red","white"] # Stored as an array
+---
+
+### part4: Describes patterns defined in part1 that can be expressed as regular expressions
+
+pattern1:'.+'
 ```
-Custom pattern names must use lowercase. Uppercase patterns may be included in the specification (such as YYYY, MM, etc.)
+Custom pattern names must use lowercase. Uppercase patterns may be included in the specification (YYYY, MM, etc.)
 
 #### Real examples
 
 ```yaml
+
+---
+
+TITLE: yaml example
+VERSION: 1.0
+date: 2020-01-01
 
 ---
 
@@ -82,16 +96,21 @@ EXT: "[a-zA-Z0-9]{1,5}" # File extension pdf xlsx ppt ...
 
 FNDL files are stored in `./.fns/index.yaml` relative to the base folder.
 
-## FNDL validation checks
+## FNDL validation
 
-1. Must follow the [YAML Spec](https://yaml.org/spec/).  
-1. Must contain at least 3 documents.
-1. The top-level item of the first document must be a Block Sequence.   
-1. The Block Sequence in the first document can contain Mappings (representing subfolders) or string Scalars (representing files).
-1. Mappings in the first document must have exactly one key, which stores the subfolder name.
-1. The value of a Mapping in the first document must be either a Block Sequence (when the subfolder has contents) or empty (for empty folders).
-1. The second document can contain multiple Mappings, with key values (pattern names) and values. These values store string Scalar arrays (examples of strings that can match the pattern).
-1. The third document can contain multiple Mappings, with key values (pattern names) and values. These values store string Scalars (regular expressions that can recognize the pattern).
+- Must follow the [YAML Spec](https://yaml.org/spec/).
+- Must include the following 4 documents:
+    1. First document: Document description
+        - Must be a mapping with "TITLE" and "VERSION" keys (values must be string scalars)
+    2. Second document: File and path patterns
+        - Top-level items must be block sequences
+        - Block sequences can contain mappings (representing subfolders) or string scalars (representing files)
+        - Mappings must have exactly one key, which stores the subfolder name
+        - Mapping values must be either block sequences (for subfolders with contents) or empty (for empty folders)
+    3. Third document: Pattern examples
+        - Can contain multiple mappings with key (pattern name) and value pairs. The value contains an array of string scalars (examples of strings that match the pattern)
+    4. Fourth document: Regular expressions for patterns
+        - Can contain multiple mappings with key (pattern name) and value pairs. The value contains a string scalar (regular expression that recognizes the pattern)
 
 ## Contributing
 

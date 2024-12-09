@@ -1,11 +1,20 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
+import starlight from '@astrojs/starlight'; 
+
+import cloudflare from '@astrojs/cloudflare';
+
 
 // https://astro.build/config
 export default defineConfig({
-	site:"https://file-name-system.github.io",
+	site:"https://filename.systems",
 	trailingSlash:"always",
+	output:"hybrid",
+
+	adapter: cloudflare({
+		platformProxy: {
+			enabled:true
+	}}),
 
 	integrations: [
 		starlight({
