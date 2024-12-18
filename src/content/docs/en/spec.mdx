@@ -1,23 +1,22 @@
 ---
-title: FNDL yaml spec
-description: Describes FNS using yaml files.
+title: YAML Spec
+description: YAML specification for describing FNS
 ---
 
 import { Aside } from '@astrojs/starlight/components';
 
-<Aside>This is an automatically translated document. [Request modifications](https://github.com/file-name-system/file-name-system.github.io)</Aside>
+<Aside>This is an automatically translated document. [Request modification](https://github.com/file-name-system/file-name-system.github.io)</Aside>
 
-# File Name Description Language - ver0.1_draft
+# FNS spec - ver1.0_draft
 
 ## Definition
 
-FNDL defines the naming conventions assigned to folders and files.
-It describes the structure and composition that file and folder names should have.
-This specification is stored in YAML format.
+This document describes the structure and composition that file and folder names should have.
+This specification is saved in YAML format.
 
 ## Detailed specifications
 
-Must include 4 parts without omission and in order, using "---".
+Using "---", it must include at least 4 parts without omission and in the correct order.
 
 ```yaml
 
@@ -26,7 +25,7 @@ Must include 4 parts without omission and in order, using "---".
 ### part1: Document description
 
 TITLE: yaml example # Document title. Required field
-VERSION: 1.0 # FNDL version. Required field
+FNS_VERSION: 1.0 # FNS spec version. Required field
 date: 2020-01-01 # The remaining document fields can be freely added to describe this file. Key names must use lowercase.
 
 ---
@@ -56,7 +55,7 @@ Custom pattern names must use lowercase. Uppercase patterns may be included in t
 ---
 
 TITLE: yaml example
-VERSION: 1.0
+FNS_VERSION: 1.0
 date: 2020-01-01
 
 ---
@@ -94,19 +93,20 @@ EXT: "[a-zA-Z0-9]{1,5}" # File extension pdf xlsx ppt ...
 
 ## Storage location
 
-FNDL files are stored in `./.fns/index.yaml` relative to the base folder.
+FNS files are stored in `./.fns/index.yaml` relative to the base folder.
+Example: documents/.fns/index.yaml, videos/.fns/index.yaml
 
-## FNDL validation
+## FNS file validation
 
 - Must follow the [YAML Spec](https://yaml.org/spec/).
 - Must include the following 4 documents:
     1. First document: Document description
-        - Must be a mapping with "TITLE" and "VERSION" keys (values must be string scalars)
+        - Must be a mapping with "TITLE" and "FNS_VERSION" keys (values must be string scalars)
     2. Second document: File and path patterns
         - Top-level items must be block sequences
         - Block sequences can contain mappings (representing subfolders) or string scalars (representing files)
         - Mappings must have exactly one key, which stores the subfolder name
-        - Mapping values must be either block sequences (for subfolders with contents) or empty (for empty folders)
+        - Mapping values must be either block sequences (for subfolders with content) or empty (for empty folders)
     3. Third document: Pattern examples
         - Can contain multiple mappings with key (pattern name) and value pairs. The value contains an array of string scalars (examples of strings that match the pattern)
     4. Fourth document: Regular expressions for patterns
@@ -114,4 +114,4 @@ FNDL files are stored in `./.fns/index.yaml` relative to the base folder.
 
 ## Contributing
 
-If you have any questions or feedback about FNDL, you can participate in the [discussions](https://github.com/file-name-system/file-name-system.github.io/discussions).
+For questions or feedback, you can participate in the [discussions](https://github.com/file-name-system/file-name-system.github.io/discussions).

@@ -1,15 +1,14 @@
 ---
-title: FNDL yaml Spec
-description: yaml 파일로 FNS를 기술합니다.
+title: YAML Spec
+description: FNS을 기술하기 위한 yaml 규격
 ---
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside>자동번역된 문서입니다.[수정요청](https://github.com/file-name-system/file-name-system.github.io)</Aside>
 
-# File Name Description Language - ver0.1_draft
+# FNS spec - ver1.0_draft
 
 ## 정의
-FNDL은 폴더 및 파일에 부여된 명명 규칙을 정의합니다.  
 파일과 폴더의 이름이 가져야할 구조와 구성을 기술합니다. 
 이 스펙은 YAML 형식의 파일로 저장됩니다. 
 
@@ -21,7 +20,7 @@ FNDL은 폴더 및 파일에 부여된 명명 규칙을 정의합니다.
 ---
 ### part1: 문서에 대한 설명
 TITLE: yaml 예제 # 문서의 제목입니다.  필수항목 
-VERSION: 1.0 # FNDL 의 버전. 필수항목  
+FNS_VERSION: 1.0 # FNS spec 의 버전. 필수항목  
 date: 2020-01-01 # 문서나머지 항목은 자유롭게 추가하여 이 파일을 설명하는데 사용할수 있습니다. 키 이름은 소문자를 사용해야 합니다.   
 ---
 ### part2: 이름과 경로명 패턴들 
@@ -41,7 +40,7 @@ pattern1:'.+'
 ```yaml
 ---
 TITLE: yaml example 
-VERSION: 1.0 
+FNS_VERSION: 1.0 
 date: 2020-01-01 
 ---
 - Reports:
@@ -70,14 +69,15 @@ EXT: "[a-zA-Z0-9]{1,5}" # File extension pdf xlsx ppt ...
 ```
 
 ## 저장위치 
-FNDL 파일은 기준폴더를 기준으로 `./.fns/index.yaml` 에 저장합니다. 
+FNS 파일은 기준폴더를 기준으로 `./.fns/index.yaml` 에 저장합니다. 
+예) documents/.fns/index.yaml , videos/.fns/index.yaml
 
 
-## FNDL 유효성 체크
+## FNS 파일 유효성 체크
 - [YAML Spec](https://yaml.org/spec/)을 따라야 합니다.  
 - 아래와 같은 4개의 Document를 포함해야 합니다.
     1. 첫번째 document : 문서에 대한 설명
-        - "TITLE" 과 "VESRION" 키값을 가진  Mapping 이어야 함. (값은  문자열 Scalar)   
+        - "TITLE" 과 "FNS_VERSION" 키값을 가진  Mapping 이어야 함. (값은  문자열 Scalar)   
     2. 두번째 document : 파일명 및 경로명 패턴 
         - 최상위 항목은 Block Sequence이어야 합니다.   
         - Block Sequence는 Mapping (하위 폴더를 의미) 또는 문자열 Scalar (파일을 의미)를 가질 수 있습니다.
@@ -89,4 +89,4 @@ FNDL 파일은 기준폴더를 기준으로 `./.fns/index.yaml` 에 저장합니
         - 여러개의 Mapping이 존재할수 있고, key값(패턴이름) 과 value값을 가집니다. 이 value값에는 문자열(패턴에 인식할 수 있는 정규식) 문자열 Scalar가 저장됩니다.
 
 ## 참여하기
-FNDL에 대한 의견이나 질문이 있으면 [discussions](https://github.com/file-name-system/file-name-system.github.io/discussions)에 참여할 수 있습니다.
+의견이나 질문이 있으면 [discussions](https://github.com/file-name-system/file-name-system.github.io/discussions)에 참여할 수 있습니다.

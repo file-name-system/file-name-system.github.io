@@ -26,10 +26,10 @@ The purpose of this homepage and [community](https://github.com/file-name-system
 
 FNS consists of a file format for storing naming conventions and tools that use them. It's similar to the relationship between HTML and related software (web browsers and web servers).
 
-### 1. FNDL (File Name Description Language)
+### 1. FNS spec (YAML)
 
-You can describe file naming rules very easily and simply. 
-For example, let's assume we have files like these: 
+You can describe file naming rules in a very simple and straightforward way. 
+Let's look at an example with the following files:
 
 <FileTree>
 - Report-revenue-20240103.xls
@@ -39,14 +39,14 @@ For example, let's assume we have files like these:
 - ...
 </FileTree>
 
-The FNDL representing this would be: 
+The YAML representation looks like this:
 
 ```yaml title="index.yaml"
 - Report-<TITLE>-<YYYYMMDD>.xls
 ```
-Repeating patterns are expressed with `<>`. It's not complicated like xml. You can create it right away with just a notepad. 
+Repeating patterns are expressed using `<>`. It's not complicated like XML. You can create it right away with just a notepad.
 
-Now let's express folders.
+Now, let's represent folders:
 
 <FileTree>
 - Reports
@@ -57,26 +57,26 @@ Now let's express folders.
   - ...
 </FileTree>
 
-Folders and files like above can be expressed as: 
+The folder and file structure above can be represented as:
 
 ```yaml title="index.yaml"
 - Reports: 
   - Report-<TITLE>-<YYYYMMDD>.xls
 ```
 
-Use `:` to indicate a folder, and indentation spaces to show items within the folder. 
+Use `:` to indicate a folder, and indentation spaces to show items within the folder.
 
-With just one yaml file like this, you can understand the content and structure of folders and share them with others. 
-For example, it becomes easier to explain work folders to others, hand over tasks, or collaborate. 
-Most importantly, since this file can be precisely interpreted by machines, it enables various applications and extensions. 
+With just one YAML file like this, you can understand and share the folder's content and structure.
+For example, it becomes easier to explain work folders to others, hand over tasks, or collaborate.
+Most importantly, since this file can be precisely interpreted by machines, it allows for various applications and extensions.
 
-The examples used above use simplified yaml to convey core concepts. 
-Please check the [FNDL specification document](../spec/) for the actual specifications.
+The examples used above are simplified YAML to convey the core concepts.
+Please check the [FNS yaml specification document](../spec/) for the actual specifications.
 
 ### 2. End-user software
 
-For FNS to be accepted by general users, user-friendly software is needed in various fields. 
-We will categorize and introduce software and services that use FNDL here.
+For FNS to be widely adopted by general users, user-friendly software is needed across various fields.
+We plan to categorize and introduce software and services here.
 
 ## FAQ
 
