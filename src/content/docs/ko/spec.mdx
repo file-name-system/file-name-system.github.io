@@ -47,7 +47,7 @@ schema: #여러 속성을 자유롭게 추가할 수 있습니다. 이경우 소
 ```yaml
 ---
 TITLE: yaml example 
-FNS_VERSION: 1.0 
+FNS_VERSION: 1.1 
 date: 2020-01-01 
 ---
 - Reports:
@@ -61,17 +61,17 @@ date: 2020-01-01
             - <TITLE>-<task>-<project>-<YYYYMMDD>-v<ver>.<EXT> # Moon Landing Project Proposal-Planning-Moon Landing-20200101-v1.0.ppt
 ---
 EX: 
-  - task: ["Research", "Planning", "Development", "Release", "Marketing"]
-  - project: ["MoonLanding", "MoonShot", "MoonWalking"]
-  - EXT: ["pdf", "xlsx", "ppt"]
+  task: ["Research", "Planning", "Development", "Release", "Marketing"]
+  project: ["MoonLanding", "MoonShot", "MoonWalking"]
+  EXT: ["pdf", "xlsx", "ppt"]
 REG:
-  - YYYYMMDD: '(?:19|20)\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])' # Date (Year-Month-Day)
-  - YYYY: '(?:19|20)\d{2}' # Year 2019 2020 2021 ...
-  - MM: "0[1-9]|1[0-2]" # Month 01 02 .. 12
-  - INDEX01: "0[1-9]|[1-9][0-9]" # Number 01 02 03 ...
-  - INDEX001: "0[0-9]{2}|[1-9][0-9]{2}" # Number 001 002 003 ...
-  - ver: '(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?' # Version 1.0.0 Reference: https://github.com/nils-tekampe/semverdoc/blob/master/semverdoc.md
-  - EXT: "[a-zA-Z0-9]{1,5}" # File extension pdf xlsx ppt ...
+  YYYYMMDD: '(?:19|20)\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])' # Date (Year-Month-Day)
+  YYYY: '(?:19|20)\d{2}' # Year 2019 2020 2021 ...
+  MM: "0[1-9]|1[0-2]" # Month 01 02 .. 12
+  INDEX01: "0[1-9]|[1-9][0-9]" # Number 01 02 03 ...
+  INDEX001: "0[0-9]{2}|[1-9][0-9]{2}" # Number 001 002 003 ...
+  ver: '(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?' # Version 1.0.0 Reference: https://github.com/nils-tekampe/semverdoc/blob/master/semverdoc.md
+  EXT: "[a-zA-Z0-9]{1,5}" # File extension pdf xlsx ppt ...
 ```
 
 <Aside type="caution">yaml은 no를 문자열이 아니라 false 로 해석합니다. - no 가 아니라 - "no" 로 입력해야 합니다.</Aside>
@@ -88,7 +88,7 @@ REG:
         - Mapping의 value 값은 반드시 Block Sequence (하위폴더에 목록이 있는 경우) 또는 빈값(빈폴더인 경우)이어야 합니다.
     3. 세번째 document : 패턴에 대한 속성 기술 
         - 최상위 항목은 여러개의 키값(REG, EX등)을 가진 Mapping 
-        - 각 Mapping은 Block Sequence 임 
+
     
 ## 참여하기
 의견이나 질문이 있으면 [discussions](https://github.com/file-name-system/file-name-system.github.io/discussions)에 참여할 수 있습니다.
