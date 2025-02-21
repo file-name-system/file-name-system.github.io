@@ -6,35 +6,42 @@ import { Aside } from '@astrojs/starlight/components';
 
 <Aside>자동번역된 문서입니다.[수정요청](https://github.com/file-name-system/file-name-system.github.io)</Aside>
 
-# FNS spec - ver1.0_draft
+# FNS spec - v1.1
 
 ## 정의
 파일과 폴더의 이름이 가져야할 구조와 구성을 기술합니다. 
 이 스펙은 YAML 형식의 파일로 저장됩니다. 
 
+## 저장위치 
+FNS 파일은 기준폴더를 기준으로 `./.fns/index.yaml` 에 저장합니다. 
+예) documents/.fns/index.yaml , videos/.fns/index.yaml
+
+
 ## 상세 규격
 
-"---" 를 사용하여 최소한 4개의 part를 생략하지 않고, 순서를 지켜서 포함하고 있어야합니다.
+"---" 를 사용하여 최소한 3개의 part를 생략하지 않고, 순서를 지켜서 포함하고 있어야합니다.
 
 ```yaml
 ---
 ### part1: 문서에 대한 설명
 TITLE: yaml 예제 # 문서의 제목입니다.  필수항목 
-FNS_VERSION: 1.0 # FNS spec 의 버전. 필수항목  
-date: 2020-01-01 # 문서나머지 항목은 자유롭게 추가하여 이 파일을 설명하는데 사용할수 있습니다. 키 이름은 소문자를 사용해야 합니다.   
+FNS_VERSION: 1.1 # FNS spec 의 버전. 필수항목  
+date: 2020-01-01 # 자유롭게 추가하여  yaml 파일을 설명하는데 사용할수 있습니다. 이경우 키 이름은 소문자를 사용해야 합니다.   
 ---
 ### part2: 이름과 경로명 패턴들 
 - 폴더이름: # ":"로 끝나면 폴더임을 나타냄.  
   - 하위폴더이름:   #앞쪽의 공백으로 tree구조를 표현함 
   - <pattern1>-<color>  #< 와 >를 사용하여 패턴을 표현함 
+    # 직접 만든 패턴명은 소문자를 사용해야 합니다.  대문자는 규격에서 관리하는 패턴명으로 사용됩니다.
 --- 
-### part3: part1에서 정의된 패턴에 올 수 있는 실제 예. 필수는 아님
-color:["black","red","white"]  # 배열로 저장. 
---- 
-### part4: part1에서 정의된 패턴중 정규식으로 표현할 수 있는 것을 기술합니다.   
-pattern1:'.+'  
+### part3: part2에서 정의된 패턴에 대한 여러가지 속성을 기술합니다. (필수아님)
+EX: # 패턴에 올수 있는 실제 예 
+  - color: ["black","red","white"]  # 배열로 저장.
+REG: # 패턴중 정규식으로 표현할 수 있는 것을 기술합니다.   
+  - pattern1: '.+'  
+schema: #여러 속성을 자유롭게 추가할 수 있습니다. 이경우 소문자를 사용해야 합니다. 
+  - color: https://schema.org/color
 ```
-직접 만든 패턴명은 소문자를 사용해야 합니다. 대문자 패턴은 규격에 포함될 수 있습니다. (YYYY,MM 등)  
 
 #### 실제예 
 ```yaml
@@ -53,25 +60,21 @@ date: 2020-01-01
         - <task>:
             - <TITLE>-<task>-<project>-<YYYYMMDD>-v<ver>.<EXT> # Moon Landing Project Proposal-Planning-Moon Landing-20200101-v1.0.ppt
 ---
-# The second area :  lists examples of patterns that can be used.
-task: ["Research", "Planning", "Development", "Release", "Marketing"]
-project: ["MoonLanding", "MoonShot", "MoonWalking"]
-EXT: ["pdf", "xlsx", "ppt"]
----
-# In the third area : patterns that can be recognized by computers are described using regular expressions.
-YYYYMMDD: '(?:19|20)\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])' # Date (Year-Month-Day)
-YYYY: '(?:19|20)\d{2}' # Year 2019 2020 2021 ...
-MM: "0[1-9]|1[0-2]" # Month 01 02 .. 12
-INDEX01: "0[1-9]|[1-9][0-9]" # Number 01 02 03 ...
-INDEX001: "0[0-9]{2}|[1-9][0-9]{2}" # Number 001 002 003 ...
-ver: '(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?' # Version 1.0.0 Reference: https://github.com/nils-tekampe/semverdoc/blob/master/semverdoc.md
-EXT: "[a-zA-Z0-9]{1,5}" # File extension pdf xlsx ppt ...
+EX: 
+  - task: ["Research", "Planning", "Development", "Release", "Marketing"]
+  - project: ["MoonLanding", "MoonShot", "MoonWalking"]
+  - EXT: ["pdf", "xlsx", "ppt"]
+REG:
+  - YYYYMMDD: '(?:19|20)\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])' # Date (Year-Month-Day)
+  - YYYY: '(?:19|20)\d{2}' # Year 2019 2020 2021 ...
+  - MM: "0[1-9]|1[0-2]" # Month 01 02 .. 12
+  - INDEX01: "0[1-9]|[1-9][0-9]" # Number 01 02 03 ...
+  - INDEX001: "0[0-9]{2}|[1-9][0-9]{2}" # Number 001 002 003 ...
+  - ver: '(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?' # Version 1.0.0 Reference: https://github.com/nils-tekampe/semverdoc/blob/master/semverdoc.md
+  - EXT: "[a-zA-Z0-9]{1,5}" # File extension pdf xlsx ppt ...
 ```
 
-## 저장위치 
-FNS 파일은 기준폴더를 기준으로 `./.fns/index.yaml` 에 저장합니다. 
-예) documents/.fns/index.yaml , videos/.fns/index.yaml
-
+<Aside type="caution">yaml은 no를 문자열이 아니라 false 로 해석합니다. - no 가 아니라 - "no" 로 입력해야 합니다.</Aside>
 
 ## FNS 파일 유효성 체크
 - [YAML Spec](https://yaml.org/spec/)을 따라야 합니다.  
@@ -83,10 +86,12 @@ FNS 파일은 기준폴더를 기준으로 `./.fns/index.yaml` 에 저장합니�
         - Block Sequence는 Mapping (하위 폴더를 의미) 또는 문자열 Scalar (파일을 의미)를 가질 수 있습니다.
         - Mapping은 반드시 단 하나의 key 를 가져야 하며, 이 키값에 하위폴더의 이름이 저장됩니다.
         - Mapping의 value 값은 반드시 Block Sequence (하위폴더에 목록이 있는 경우) 또는 빈값(빈폴더인 경우)이어야 합니다.
-    3. 세번째 document : 패턴의 예들 
-        - 여러개의 Mapping이 존재할수 있고, key값(패턴이름) 과 value값을 가집니다. 이 value값에는 문자열(패턴에 올 수 있는 문자열 예들) Scalar 배열이 저장됩니다.
-    4. 네번째 document : 패턴을 위한 정규식 
-        - 여러개의 Mapping이 존재할수 있고, key값(패턴이름) 과 value값을 가집니다. 이 value값에는 문자열(패턴에 인식할 수 있는 정규식) 문자열 Scalar가 저장됩니다.
-
+    3. 세번째 document : 패턴에 대한 속성 기술 
+        - 최상위 항목은 여러개의 키값(REG, EX등)을 가진 Mapping 
+        - 각 Mapping은 Block Sequence 임 
+    
 ## 참여하기
 의견이나 질문이 있으면 [discussions](https://github.com/file-name-system/file-name-system.github.io/discussions)에 참여할 수 있습니다.
+
+## 이전버젼
+- [ver1.0_draft](   ../spec_draft/) 

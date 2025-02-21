@@ -7,10 +7,14 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "i18n": "node ./node_modules/lingo.dev/bin/cli.mjs i18n "
   },
   "dependencies": {
     "@astrojs/starlight": "^0.30.5",
     "typescript": "^5.7.3"
+  },
+  "devDependencies": {
+    "lingo.dev": "^0.74.16"
   }
 }

@@ -1,54 +1,60 @@
 ---
 title: YAML Spec
-description: YAML specification for describing FNS
+description: YAML specifications for describing FNS
 ---
 
 import { Aside } from '@astrojs/starlight/components';
 
-<Aside>This is an automatically translated document. [Request modification](https://github.com/file-name-system/file-name-system.github.io)</Aside>
+<Aside>This document has been automatically translated. [Request modification](https://github.com/file-name-system/file-name-system.github.io)</Aside>
 
-# FNS spec - ver1.0_draft
+# FNS spec - v1.1
 
-## Definition
+## definition
 
-This document describes the structure and composition that file and folder names should have.
-This specification is saved in YAML format.
+This describes the structure and composition that file and folder names should have.
+This spec is saved as a YAML format file.
 
-## Detailed specifications
+## storage location
 
-Using "---", it must include at least 4 parts without omission and in the correct order.
+The FNS file is stored in `./.fns/index.yaml` based on the reference folder.
+Example: documents/.fns/index.yaml , videos/.fns/index.yaml
+
+## detailed specifications
+
+It must include at least 3 parts without omission, keeping the order, using "---".
 
 ```yaml
 
 ---
 
-### part1: Document description
+### part1: description of the document
 
-TITLE: yaml example # Document title. Required field
-FNS_VERSION: 1.0 # FNS spec version. Required field
-date: 2020-01-01 # The remaining document fields can be freely added to describe this file. Key names must use lowercase.
+TITLE: yaml example # This is the title of the document. Required field
+FNS_VERSION: 1.1 # Version of FNS spec. Required field
+date: 2020-01-01 # You can freely add and use this to describe the yaml file. In this case, the key name must use lowercase.
 
 ---
 
-### part2: Name and path patterns
+### part2: name and path patterns
 
-- folder name: # Ending with ":" indicates it's a folder
-  - subfolder name: # Tree structure is expressed with leading spaces
-  - <pattern1>-<color> # Patterns are expressed using < and >
+- folder name: # Ending with ":" indicates it's a folder.
+  - subfolder name:   # Tree structure is represented by spaces at the front
+  - <pattern1>-<color>  # Patterns are expressed using < and >
+    # Self-created pattern names must use lowercase. Uppercase is used for pattern names managed by the specification.
+
 ---
 
-### part3: Actual examples that can be used for patterns defined in part1. Not required
+### part3: describes various properties for patterns defined in part2. (not required)
 
-color:["black","red","white"] # Stored as an array
----
-
-### part4: Describes patterns defined in part1 that can be expressed as regular expressions
-
-pattern1:'.+'
+EX: # Actual examples that can come in the pattern
+  - color: ["black","red","white"]  # Stored as an array.
+REG: # Describes patterns that can be expressed as regular expressions.
+  - pattern1: '.+'
+schema: # You can freely add various properties. In this case, lowercase must be used.
+  - color: https://schema.org/color
 ```
-Custom pattern names must use lowercase. Uppercase patterns may be included in the specification (YYYY, MM, etc.)
 
-#### Real examples
+#### real example
 
 ```yaml
 
@@ -72,46 +78,38 @@ date: 2020-01-01
 
 ---
 
-# The second area: lists examples of patterns that can be used.
-
-task: ["Research", "Planning", "Development", "Release", "Marketing"]
-project: ["MoonLanding", "MoonShot", "MoonWalking"]
-EXT: ["pdf", "xlsx", "ppt"]
-
----
-
-# In the third area: patterns that can be recognized by computers are described using regular expressions.
-
-YYYYMMDD: '(?:19|20)\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])' # Date (Year-Month-Day)
-YYYY: '(?:19|20)\d{2}' # Year 2019 2020 2021 ...
-MM: "0[1-9]|1[0-2]" # Month 01 02 .. 12
-INDEX01: "0[1-9]|[1-9][0-9]" # Number 01 02 03 ...
-INDEX001: "0[0-9]{2}|[1-9][0-9]{2}" # Number 001 002 003 ...
-ver: '(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?' # Version 1.0.0 Reference: https://github.com/nils-tekampe/semverdoc/blob/master/semverdoc.md
-EXT: "[a-zA-Z0-9]{1,5}" # File extension pdf xlsx ppt ...
+EX:
+  - task: ["Research", "Planning", "Development", "Release", "Marketing"]
+  - project: ["MoonLanding", "MoonShot", "MoonWalking"]
+  - EXT: ["pdf", "xlsx", "ppt"]
+REG:
+  - YYYYMMDD: '(?:19|20)\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])' # Date (Year-Month-Day)
+  - YYYY: '(?:19|20)\d{2}' # Year 2019 2020 2021 ...
+  - MM: "0[1-9]|1[0-2]" # Month 01 02 .. 12
+  - INDEX01: "0[1-9]|[1-9][0-9]" # Number 01 02 03 ...
+  - INDEX001: "0[0-9]{2}|[1-9][0-9]{2}" # Number 001 002 003 ...
+  - ver: '(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?' # Version 1.0.0 Reference: https://github.com/nils-tekampe/semverdoc/blob/master/semverdoc.md
+  - EXT: "[a-zA-Z0-9]{1,5}" # File extension pdf xlsx ppt ...
 ```
 
-## Storage location
+<Aside type="caution">yaml interprets 'no' as false, not as a string. You should input - "no" instead of - no.</Aside>
 
-FNS files are stored in `./.fns/index.yaml` relative to the base folder.
-Example: documents/.fns/index.yaml, videos/.fns/index.yaml
+- Must follow the [YAML Spec](https://yaml.org/spec/).  
+- Should include 4 documents as follows:
+    1. First document: description of the document
+        - Must be a mapping with keys "TITLE" and "FNS_VERSION" (values are string scalars)   
+    2. Second document: filename and path patterns 
+        - The top-level item must be a block sequence.   
+        - The block sequence can contain mappings (representing subfolders) or string scalars (representing files).
+        - Mappings must have only one key, which stores the name of the subfolder.
+        - The value of a mapping must be either a block sequence (if the subfolder has contents) or empty (if it's an empty folder).
+    3. Third document: description of pattern attributes
+        - The top-level item is a mapping with multiple keys (REG, EX, etc.) 
+        - Each mapping is a block sequence
 
-## FNS file validation
+If you have any opinions or questions, you can participate in the [discussions](https://github.com/file-name-system/file-name-system.github.io/discussions).
 
-- Must follow the [YAML Spec](https://yaml.org/spec/).
-- Must include the following 4 documents:
-    1. First document: Document description
-        - Must be a mapping with "TITLE" and "FNS_VERSION" keys (values must be string scalars)
-    2. Second document: File and path patterns
-        - Top-level items must be block sequences
-        - Block sequences can contain mappings (representing subfolders) or string scalars (representing files)
-        - Mappings must have exactly one key, which stores the subfolder name
-        - Mapping values must be either block sequences (for subfolders with content) or empty (for empty folders)
-    3. Third document: Pattern examples
-        - Can contain multiple mappings with key (pattern name) and value pairs. The value contains an array of string scalars (examples of strings that match the pattern)
-    4. Fourth document: Regular expressions for patterns
-        - Can contain multiple mappings with key (pattern name) and value pairs. The value contains a string scalar (regular expression that recognizes the pattern)
 
-## Contributing
+## Previous versions
 
-For questions or feedback, you can participate in the [discussions](https://github.com/file-name-system/file-name-system.github.io/discussions).
+- [ver1.0_draft](   ../spec_draft/)
